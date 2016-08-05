@@ -5,6 +5,7 @@
   "main": "./lib/main.js",
   "dependencies": {},
   "devDependencies": {
+    "cheerio": "^0.20.0",
     "mocha": "^3.0.0"
   },
   "scripts": {
