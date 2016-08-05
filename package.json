@@ -1,0 +1,22 @@
+{
+  "name": "svg-css-combiner",
+  "version": "0.0.1",
+  "description": "Helps with taking single SVG files and turns them into a big sprite",
+  "main": "./lib/main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^3.0.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "svg",
+    "compiler",
+    "sprite",
+    "css",
+    "scss"
+  ],
+  "author": "Carl Munn",
+  "license": "ISC"
+}

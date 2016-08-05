@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+const path = require('path');
+const fs   = require('fs');
+
+const lib_path = path.join(fs.realpathSync(path.dirname(__filename)), '../lib');
+
+console.log('path', lib_path);
