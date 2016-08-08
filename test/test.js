@@ -51,7 +51,7 @@ describe('Test with without fresh load', _=>{
 describe('Test with fresh load', _=>{
 
   beforeEach(()=>{
-    mainSVG = new MainApp('path');
+    const mainSVG = new MainApp('path');
   });
 
   it('should check the SVG total height/width', ()=>{
