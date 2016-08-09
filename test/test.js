@@ -22,6 +22,8 @@ describe('Test with without fresh load', _=>{
     assert.equal(mainSvg.files().length, 5);
   });
 
+  it('should check for no SVG files');
+
   it('should check #content', ()=>{
     mainSvg.add(basePath('files'));
     assert(mainSvg.files(0).content.length > 10);
@@ -64,20 +66,17 @@ describe('Test with fresh load', _=>{
 
   it('should check the file symbol element', ()=>{
     mainSvg.add(basePath('files'));
-    assert(typeof(mainSvg.files(0)._svgSymbol()) == 'string');
+    assert(typeof(mainSvg.files(0).symbolElement()) == 'string');
   });
 
   it('should check the file use element', ()=>{
     mainSvg.add(basePath('files'));
-    assert(typeof(mainSvg.files(0)._svgUse()) == 'string');
+    assert(typeof(mainSvg.files(0).useElement()) == 'string');
   });
 
-  it.only('should test #svg', ()=>{
+  it('should test #svg', ()=>{
     mainSvg.add(basePath('files'));
-
-    //console.info('SVG', mainSvg.toSvg());
-
-    mainSvg.toFile();
+    mainSvg.toFile('/dev/null');
   });
 
   describe('test Sort');

@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+const path    = require('path');
+const fs      = require('fs');
+const program = require('commander');
+
+program.version('0.0.1.beta').
+	option('-i, --input [string]', 'input directory').
+	option('-o, --output [string]', 'output sprite to (default ./sprite.svg)').
+	option('-h, --html [string]', 'output html to (default ./sprites.html)').
+	option('-c, --css [type]', 'output css to (default ./sprites.css)' ).
+	parse(process.argv);
+
+//program.on('--help', ()=>{});
+
+const NAME   = 'sprite';
+const INPUT  = program.input  || `./`;
+const OUTPUT = program.output || `${NAME}.svg`;
+const HTML   = program.html   || `./${NAME}.html`;
+const CSS    = program.css    || `./${NAME}.css`;
+
+const libPath = path.join(fs.realpathSync(path.dirname(__filename)), '../lib');
+
+console.log(`Input: ${INPUT}`, CSS);
+
+const MainApp = require(libPath+'/main');
+
+const app = new MainApp;
+
+//if(!prompt('About to run without options, work this directory?')) return;
+
+if(app.add(INPUT)) {
+	console.info("SVG Files:", app.files().length);
+
+	app.toFile(OUTPUT);
+	app.toCss(CSS);
+	app.toHtml(HTML);
+} else {
+	console.error('No files found for:', INPUT)
+}
+
+
+

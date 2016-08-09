@@ -1,12 +1,14 @@
 {
-  "name": "svg-css-combiner",
+  "name": "svg-css-complier",
   "version": "0.0.1",
   "description": "Helps with taking single SVG files and turns them into a big sprite",
   "main": "./lib/main.js",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
+    "commander": "^2.9.0",
     "cheerio": "^0.20.0",
     "mocha": "^3.0.0"
+  },
+  "devDependencies": {
   },
   "scripts": {
     "test": "mocha"
