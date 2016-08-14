@@ -1,2 +1,4 @@
 node_modules
+*.svg
+.swp
 .DS_Store

@@ -1,3 +1,5 @@
+'use strict';
+
 const path    = require('path');
 //const cheerio = require('cheerio');
 
@@ -55,6 +57,8 @@ describe('Test with without fresh load', _=>{
 });
 
 describe('Test with fresh load', _=>{
+  
+  let mainSvg = null;
 
   beforeEach(()=>{
     mainSvg = new MainApp('path');
@@ -64,7 +68,9 @@ describe('Test with fresh load', _=>{
     mainSvg.add(basePath('files'));
 
     assert.equal(mainSvg.height(), 222);
-    assert.equal(mainSvg.width(), 230);
+    
+    // Width being the item with the largest.
+    assert.equal(mainSvg.width(), 43);
   });
 
   it('should check the file symbol element', ()=>{
@@ -82,9 +88,13 @@ describe('Test with fresh load', _=>{
     assert(typeof(mainSvg.toSvg()) == 'string');
   });
 
+  // Will fail on non *inx systems, windows doesn't have /dev/null
   it('should test #svg', ()=>{
     mainSvg.add(basePath('files'));
-    mainSvg.toFile('/dev/null');
+
+    mainSvg.svgGroup.arrangeGroups();
+
+    assert(typeof(mainSvg.toSvg()) == 'string');
   });
 
   it('it should remove file from SvgGroup', ()=>{
@@ -98,9 +108,26 @@ describe('Test with fresh load', _=>{
     assert.equal(svgGroup.length, 0);
   });
 
+  it('should test #useElement on SvgGroup', ()=>{
+    const svgFile  = new SvgFile('./test/files/home.svg');
+    const svgGroup = new SvgGroup;
+    svgGroup.add(svgFile);
+    assert(svgGroup.useElement() instanceof Array);
+  })
+
   describe('test Sort');
 
   describe('test Group');
 
   it('should test having groups and files in SvgGroup');
+
+  describe('Grouping/Sorting', ()=>{
+    it('should test #_calcLocations', ()=>{
+      mainSvg.add(basePath('files'));
+
+      mainSvg.svgGroup._calcLocations();
+
+      mainSvg.toFile('test-calculation.svg');
+    });
+  });
 });
