@@ -122,10 +122,10 @@ describe('Test with fresh load', _=>{
   it('should test having groups and files in SvgGroup');
 
   describe('Grouping/Sorting', ()=>{
-    it('should test #_calcLocations', ()=>{
+    it('should test #calcLocations', ()=>{
       mainSvg.add(basePath('files'));
 
-      mainSvg.svgGroup._calcLocations();
+      mainSvg.svgGroup.calcLocations();
 
       mainSvg.toFile('test-calculation.svg');
     });
