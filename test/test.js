@@ -1,7 +1,6 @@
 'use strict';
 
 const path    = require('path');
-//const cheerio = require('cheerio');
 
 const SvgGroup = require('../lib/svg-group').SvgGroup;
 const SvgFile  = require('../lib/svg-file').SvgFile;
@@ -11,6 +10,10 @@ const assert  = require('assert');
 
 function basePath(loc) {
   return path.join(path.dirname(__filename), loc);
+}
+
+function regexTest(str, exp) {
+  assert(!!str.match(exp));
 }
 
 describe('Test with without fresh load', _=>{
@@ -129,5 +132,42 @@ describe('Test with fresh load', _=>{
 
       mainSvg.toFile('test-calculation.svg');
     });
+  });
+});
+
+describe('Test CSS Generation', _=>{
+  
+  var mainSvg;
+  const cssBgRegex = /background:\s[\.\w\/]+\s(\d{1,2})px\s(\d{1,2})px;/;
+
+  before(()=>{
+    mainSvg = new MainApp('path');
+    mainSvg.add(basePath('files'));
+  });
+
+  it('tests the #cssEntry method', ()=>{
+    mainSvg.svgGroup.calcLocations();
+    const str = mainSvg.files(2).cssEntry('./file.svg');
+    assert(!!str.match(cssBgRegex));
+  });
+
+  it('test first CSS position', ()=>{
+    mainSvg.svgGroup.calcLocations();
+
+    const str = mainSvg.files(0).cssEntry('./file.svg');
+    const pos = str.match(cssBgRegex).splice(1,2);
+
+    assert.equal(pos[0], 0);
+    assert.equal(pos[1], 0);
+  });
+
+  it('test first CSS position', ()=>{
+    mainSvg.svgGroup.calcLocations();
+    
+    const str = mainSvg.toCSS();
+
+    // console.info(str);
+    // Basic test for now
+    assert(str.length > 10);
   });
 });
