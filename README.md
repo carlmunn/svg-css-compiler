@@ -10,3 +10,9 @@ Generate a packed SVG file
 Generate CSS file for reference (Maybe SCSS option)
 
 Generate HTML example file for easy viewing
+
+### Usage
+
+ - Setup `npm install`
+ - Test `npm test`
+

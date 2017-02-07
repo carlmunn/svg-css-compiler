@@ -118,9 +118,9 @@ describe('Test with fresh load', _=>{
     assert(svgGroup.useElement() instanceof Array);
   })
 
-  describe('test Sort');
+  //describe('test Sort');
 
-  describe('test Group');
+  //describe('test Group');
 
   it('should test having groups and files in SvgGroup');
 
