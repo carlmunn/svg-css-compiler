@@ -170,4 +170,15 @@ describe('Test CSS Generation', _=>{
     // Basic test for now
     assert(str.length > 10);
   });
+
+
+  it.only('tests CSS generated string', ()=>{
+    mainSvg.renderCss('file');
+    
+    //const str = mainSvg.toCSS();
+
+    // console.info(str);
+    // Basic test for now
+    //assert(str.length > 10);
+  });
 });
