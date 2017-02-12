@@ -29,7 +29,15 @@ describe('Test with without fresh load', _=>{
     mainSvg.add(basePath('files'));
     assert.equal(mainSvg.files().length, 7);
   });
-
+  
+  /*
+  it.only('should ignore the generated sprites file', ()=>{
+    assert(!mainSvg.files().length);
+    mainSvg.add(basePath('files'));
+    console.info(mainSvg.files())
+  });
+  */
+  
   it('should check for no SVG files');
 
   it('should check #content', ()=>{
@@ -138,7 +146,7 @@ describe('Test with fresh load', _=>{
 describe('Test CSS Generation', _=>{
   
   var mainSvg;
-  const cssBgRegex = /background:\s[\.\w\/]+\s(\d{1,2})px\s(\d{1,2})px;/;
+  const cssBgRegex = /background:\s.*\s(\d{1,2})px\s(\d{1,2})px;/;
 
   before(()=>{
     mainSvg = new MainApp('path');
@@ -152,19 +160,18 @@ describe('Test CSS Generation', _=>{
   });
 
   it('test first CSS position', ()=>{
-    mainSvg.svgGroup.calcLocations();
-
+    
     const str = mainSvg.files(0).cssEntry('./file.svg');
-    const pos = str.match(cssBgRegex).splice(1,2);
+    const pos = str.match(cssBgRegex).splice(1, 2);
 
     assert.equal(pos[0], 0);
-    assert.equal(pos[1], 0);
+    assert.equal(pos[1], '33');
   });
 
   it('test first CSS position', ()=>{
     mainSvg.svgGroup.calcLocations();
     
-    const str = mainSvg.toCSS();
+    const str = mainSvg.renderCss();
 
     // console.info(str);
     // Basic test for now
@@ -172,7 +179,7 @@ describe('Test CSS Generation', _=>{
   });
 
 
-  it.only('tests CSS generated string', ()=>{
+  it('tests CSS generated string', ()=>{
     mainSvg.renderCss('file');
     
     //const str = mainSvg.toCSS();
