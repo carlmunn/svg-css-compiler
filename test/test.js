@@ -165,7 +165,7 @@ describe('Test CSS Generation', _=>{
     const pos = str.match(cssBgRegex).splice(1, 2);
 
     assert.equal(pos[0], 0);
-    assert.equal(pos[1], '33');
+    assert.equal(pos[1], 0);
   });
 
   it('test first CSS position', ()=>{
@@ -188,4 +188,16 @@ describe('Test CSS Generation', _=>{
     // Basic test for now
     //assert(str.length > 10);
   });
+  
+  it.only('tests HTML rendering', ()=>{
+    const SvgHtml = require('../lib/svg-html').SvgHtml;
+    
+    const svgs = [new SvgFile('./test/files/home.svg')];
+    
+    const htmlRender = new SvgHtml({css: 'CSS', svgs: svgs});
+    
+    const str = htmlRender.render();
+    
+    console.info('STR', str);
+  })
 });

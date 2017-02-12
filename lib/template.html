@@ -1,1 +1,24 @@
-tmp
+<!DOCTYPE html>
+  <head>
+    <title>Sprites {{count}}</title>
+  </head>
+  
+  <style>
+    body {
+      background-color: #EEE;
+    }
+    .icon {
+      display: inline-block;
+      border: 1px solid;
+      margin: 5px;
+    }
+    
+    {{{css}}}
+  </style>
+  
+  <body>
+    {{#svgs}}
+    <div class='icon {{ cssKlass }}'></div>
+    {{/svgs}}
+  </body>
+</html>
