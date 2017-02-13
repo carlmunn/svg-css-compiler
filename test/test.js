@@ -146,7 +146,7 @@ describe('Test with fresh load', _=>{
 describe('Test CSS Generation', _=>{
   
   var mainSvg;
-  const cssBgRegex = /background:\s.*\s(\d{1,2})px\s(\d{1,2})px;/;
+  const cssBgRegex = /background:\s.*\s(\d{1,2})px\s(-\d{1,2})px;/;
 
   before(()=>{
     mainSvg = new MainApp('path');
@@ -189,7 +189,7 @@ describe('Test CSS Generation', _=>{
     //assert(str.length > 10);
   });
   
-  it.only('tests HTML rendering', ()=>{
+  it('tests HTML rendering', ()=>{
     const SvgHtml = require('../lib/svg-html').SvgHtml;
     
     const svgs = [new SvgFile('./test/files/home.svg')];
@@ -198,6 +198,6 @@ describe('Test CSS Generation', _=>{
     
     const str = htmlRender.render();
     
-    console.info('STR', str);
+    assert(str.length > 10);
   })
 });
