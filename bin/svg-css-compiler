@@ -9,6 +9,8 @@ program.version('0.0.1.beta').
   option('-o, --output [string]', 'output sprite to (default ./sprite.svg)').
   option('-h, --html [string]', 'output html to (default ./sprites.html)').
   option('-c, --css [type]', 'output css to (default ./sprites.css)' ).
+  option('-v, --verbose', 'verbose' ).
+  option('--stdout', 'output to standard output' ).
   parse(process.argv);
 
 //program.on('--help', ()=>{});
@@ -21,22 +23,25 @@ const CSS         = program.css    || `./${NAME}.css`;
 
 const libPath = path.join(fs.realpathSync(path.dirname(__filename)), '../lib');
 
-console.log(`Input: ${INPUT}`, CSS);
+if(program.verbose) console.log(`Input: ${INPUT}`, CSS);
 
 const MainApp = require(libPath+'/main');
 
-const app = new MainApp({spriteName: NAME});
+const app = new MainApp({spriteName: NAME, program: program});
 
 //if(!prompt('About to run without options, work this directory?')) return;
 
 if(app.add(INPUT)) {
-  console.info("SVG Files:", app.files().length);
-
-  app.toFile(OUTPUT);
-  const cssStr = app.renderCss(CSS);
+  if(program.verbose) console.info("SVG Files:", app.files().length);
+  //if(program.stdout)  console.info("Output to STDOUT");
   
-  app.toHtml({file: HTML_OUTPUT});
+  // Send the SVG to file
+  app.toFile(OUTPUT);
+
+  if(program.stdout) console.info(app.renderCss(CSS));
+  
+  if(!program.stdout) app.toHtml({file: HTML_OUTPUT});
   
 } else {
-  console.error('No files found for:', INPUT)
+  if(program.verbose) console.error('No files found for:', INPUT)
 }

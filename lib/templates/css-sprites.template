@@ -1,0 +1,8 @@
+/* Automatically generated */
+{{#svgs}}
+.sprite--{{cssClassName}} {
+  background: url({{{spriteFile}}}) {{xPos}}px -{{yPos}}px;
+  height: {{height}}px;
+  width: {{width}}px;
+}
+{{/svgs}}

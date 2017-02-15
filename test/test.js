@@ -149,7 +149,7 @@ describe('Test CSS Generation', _=>{
   const cssBgRegex = /background:\s.*\s(\d{1,2})px\s(-\d{1,2})px;/;
 
   before(()=>{
-    mainSvg = new MainApp('path');
+    mainSvg = new MainApp({spriteName: 'sprites'});
     mainSvg.add(basePath('files'));
   });
 
@@ -180,7 +180,7 @@ describe('Test CSS Generation', _=>{
 
 
   it('tests CSS generated string', ()=>{
-    mainSvg.renderCss('file');
+    mainSvg.renderCss();
     
     //const str = mainSvg.toCSS();
 

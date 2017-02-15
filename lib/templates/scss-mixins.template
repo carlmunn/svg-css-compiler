@@ -1,0 +1,21 @@
+// Sprite version
+.sprite--{{name}} {
+  background: url({{spriteFile}}) {{xPos}} {{yPos}};
+  height: {{height}};
+  width: {{width}};
+}
+
+// Sprite version
+@mixin sprite--{{name}} {
+  background: url({{spriteFile}}) {{xPos}} {{yPos}};
+  height: {{height}};
+  width: {{width}};
+}
+
+// Single image
+@mixin img--{{name}}($width: {{width}}, $height: {{height}}) {
+  background: url({{file}}) 0 0 no-repeat;
+  background-size: contain;
+  width: $width;
+  height: $height;
+}
