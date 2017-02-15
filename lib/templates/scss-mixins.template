@@ -1,21 +1,22 @@
-// Sprite version
-.sprite--{{name}} {
-  background: url({{spriteFile}}) {{xPos}} {{yPos}};
-  height: {{height}};
-  width: {{width}};
-}
+/* Automatically generated */
 
-// Sprite version
-@mixin sprite--{{name}} {
-  background: url({{spriteFile}}) {{xPos}} {{yPos}};
-  height: {{height}};
-  width: {{width}};
-}
+{{#svgs}}
 
-// Single image
-@mixin img--{{name}}($width: {{width}}, $height: {{height}}) {
-  background: url({{file}}) 0 0 no-repeat;
+// ---------------------------- {{cssClassName}} ---------------------------------
+.sprite--{{{cssClassName}}} {
+  background: url({{{spriteFile}}}) {{xPos}}px -{{yPos}}px;
+  height: {{height}}px;
+  width: {{width}}px;
+}
+@mixin sprite--{{{cssClassName}}} {
+  background: url({{{uri}}}) {{xPos}}px -{{yPos}}px;
+  height: {{height}}px;
+  width: {{width}}px;
+}
+@mixin img--{{{cssClassName}}}($width: {{width}}px, $height: {{height}}px) {
+  background: url({{{uri}}}) 0 0 no-repeat;
   background-size: contain;
   width: $width;
   height: $height;
 }
+{{/svgs}}

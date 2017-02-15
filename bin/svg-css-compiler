@@ -11,6 +11,7 @@ program.version('0.0.1.beta').
   option('-c, --css [type]', 'output css to (default ./sprites.css)' ).
   option('-v, --verbose', 'verbose' ).
   option('--stdout', 'output to standard output' ).
+  option('--postfix-uri [string]', 'The directory location for the URI i.e </assets/icons/>file.svg' ).
   parse(process.argv);
 
 //program.on('--help', ()=>{});
@@ -38,8 +39,12 @@ if(app.add(INPUT)) {
   // Send the SVG to file
   app.toFile(OUTPUT);
 
-  if(program.stdout) console.info(app.renderCss(CSS));
-  
+  if(program.stdout) console.info(app.renderCss({
+    useScss:    true,
+    postfixUri: program.postfixUri,
+    spriteName: OUTPUT
+  }));
+
   if(!program.stdout) app.toHtml({file: HTML_OUTPUT});
   
 } else {
