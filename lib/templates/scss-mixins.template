@@ -3,20 +3,23 @@
 {{#svgs}}
 
 // ---------------------------- {{cssClassName}} ---------------------------------
-.sprite--{{{cssClassName}}} {
-  background: url({{{spriteFile}}}) {{xPos}}px -{{yPos}}px;
-  height: {{height}}px;
-  width: {{width}}px;
-}
 @mixin sprite--{{{cssClassName}}} {
-  background: url({{{uri}}}) {{xPos}}px -{{yPos}}px;
+  background: {{{spriteFile}}} {{xPos}}px -{{yPos}}px;
   height: {{height}}px;
-  width: {{width}}px;
-}
+  width: {{width}}px;}
+@mixin img--{{{cssClassName}}} {
+  background: {{{imageUrl}}} {{xPos}}px -{{yPos}}px;
+  height: {{height}}px;
+  width: {{width}}px;}
+@mixin img-bg--{{{cssClassName}}} {
+  background: {{{imageUrl}}} 0 0 no-repeat;
+  background-size: contain;}
 @mixin img--{{{cssClassName}}}($width: {{width}}px, $height: {{height}}px) {
-  background: url({{{uri}}}) 0 0 no-repeat;
-  background-size: contain;
+  @include img-bg--{{{cssClassName}}};
   width: $width;
-  height: $height;
-}
+  height: $height;}
+.sprite--{{{cssClassName}}} {
+@include sprite--{{{cssClassName}}};}
+.img--{{{cssClassName}}} {
+@include img--{{{cssClassName}}};}
 {{/svgs}}

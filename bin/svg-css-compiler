@@ -7,7 +7,7 @@ const program = require('commander');
 program.version('0.0.1.beta').
   option('-i, --input [string]', 'input directory').
   option('-o, --output [string]', 'output sprite to (default ./sprite.svg)').
-  option('-h, --html [string]', 'output html to (default ./sprites.html)').
+  option('--html [string]', 'output html to (default ./sprites.html)').
   option('-c, --css [type]', 'output css to (default ./sprites.css)' ).
   option('-v, --verbose', 'verbose' ).
   option('--stdout', 'output to standard output' ).
@@ -45,7 +45,7 @@ if(app.add(INPUT)) {
     spriteName: OUTPUT
   }));
 
-  if(!program.stdout) app.toHtml({file: HTML_OUTPUT});
+  if(!program.stdout) app.toHtml({spriteName: OUTPUT, file: HTML_OUTPUT});
   
 } else {
   if(program.verbose) console.error('No files found for:', INPUT)

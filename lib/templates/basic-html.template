@@ -18,7 +18,7 @@
   
   <body>
     {{#svgs}}
-    <div class='icon sprite--{{ cssKlass }}'></div>
+    <div class='icon sprite--{{ cssKlass }}' title='sprite--{{ cssKlass }}'></div>
     {{/svgs}}
   </body>
 </html>
