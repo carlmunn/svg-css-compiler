@@ -1,15 +1,14 @@
 ### NodeJS script to combine multi SVG files into one to help with sprite creation
 
-TODO: use a naming convention
--hov
--sel
--sel-hov
+TODO: Use naming convention for files, *-hov, *-sel, *-sel, *-hov
 
-~~Generate a packed SVG file~~
+TODO: Exclude Include options or config file to identify specifics
 
-Generate CSS file for reference (Maybe SCSS option)
+TODO: Generate CSS file for reference (Maybe SCSS option)
 
-~~Generate HTML example file for easy viewing~~
+TODO: DONE: ~~Generate a packed SVG file~~
+
+TODO: DONE: ~~Generate HTML example file for easy viewing~~
 
 ### Usage
 
@@ -23,6 +22,13 @@ Example command
 
 ```bash
 svg-css-compiler <location> --postfix="/assets/icons"
+```
+
+Output then move, I would normally have this as a .sh script in the app's root dir for quick access
+``` bash
+svg-css-compiler -i ./path/ --postfix-uri xyzzy/icons/ --stdout > ./path/_sprites.scss
+mv ./__sprites.svg app/assets/images/xyzzy/icons/__sprites.svg
+
 ```
 
 #### Options

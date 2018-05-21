@@ -2,13 +2,9 @@
 
 {{#svgs}}
 
-// ---------------------------- {{cssClassName}} ---------------------------------
+// ----------------------- {{cssClassName}} -------------------------
 @mixin sprite--{{{cssClassName}}} {
   background: {{{spriteFile}}} {{xPos}}px -{{yPos}}px;
-  height: {{height}}px;
-  width: {{width}}px;}
-@mixin img--{{{cssClassName}}} {
-  background: {{{imageUrl}}} {{xPos}}px -{{yPos}}px;
   height: {{height}}px;
   width: {{width}}px;}
 @mixin img-bg--{{{cssClassName}}} {
@@ -18,8 +14,13 @@
   @include img-bg--{{{cssClassName}}};
   width: $width;
   height: $height;}
-.sprite--{{{cssClassName}}} {
-@include sprite--{{{cssClassName}}};}
-.img--{{{cssClassName}}} {
-@include img--{{{cssClassName}}};}
 {{/svgs}}
+// ---------------------------- All ---------------------------------
+@mixin sprites--all-classes {
+{{#svgs}}
+  .sprite--{{{cssClassName}}} {
+  @include sprite--{{{cssClassName}}};}
+  .img--{{{cssClassName}}} {
+  @include img--{{{cssClassName}}};}
+{{/svgs}}
+}

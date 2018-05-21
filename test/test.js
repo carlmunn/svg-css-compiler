@@ -201,3 +201,34 @@ describe('Test CSS Generation', _=>{
     assert(str.length > 10);
   })
 });
+
+describe('Tests for SvgGroup', ()=>{
+
+  var obj = null;
+  var filename = null;
+
+  beforeEach(()=>{
+    obj      = new SvgGroup;
+    filename = 'testfile.svg';
+  });
+
+  function assert_path(_path, opts) {
+    assert.equal(obj._location(filename, opts), _path);
+  }
+
+  it("checks the postfix is generated with absolute", ()=>{
+    assert_path('testfile.svg', {});
+  });
+
+  it("checks the postfix with no postfixUri", ()=>{
+    assert_path('testfile.svg', {relative: false});
+  });
+
+  it("checks the postfix with postfixUri", ()=>{
+    assert_path('/postfix/testfile.svg', {postfixUri: '/postfix/', relative: false});
+  });
+
+  it("checks the postfix with postfixUri but no forward slash", ()=>{
+    assert_path('postfix/testfile.svg', {postfixUri: 'postfix/', relative: false});
+  });
+});
