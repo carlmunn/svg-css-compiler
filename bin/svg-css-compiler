@@ -8,6 +8,7 @@ program.version('0.0.1.beta').
   option('-i, --input [string]', 'input directory').
   option('-o, --output [string]', 'output sprite to (default ./sprite.svg)').
   option('--html [string]', 'output html to (default ./sprites.html)').
+  option('--config [string]', '(default svg-css-compiler-config.json)').
   option('-c, --css [type]', 'output css to (default ./sprites.css)' ).
   option('-v, --verbose', 'verbose' ).
   option('--stdout', 'output to standard output' ).
@@ -21,14 +22,25 @@ const INPUT       = program.input  || `./`;
 const OUTPUT      = program.output || `${NAME}.svg`;
 const HTML_OUTPUT = program.html   || `./${NAME}.html`;
 const CSS         = program.css    || `./${NAME}.css`;
+const CONFIG      = program.config || 'svg-css-compiler-config.json';
 
 const libPath = path.join(fs.realpathSync(path.dirname(__filename)), '../lib');
 
 if(program.verbose) console.log(`Input: ${INPUT}`, CSS);
 
 const MainApp = require(libPath+'/main');
+const Config  = require(libPath+'/config').Config;
 
-const app = new MainApp({spriteName: NAME, program: program});
+const config_file = path.join(INPUT, CONFIG)
+var config;
+
+if(fs.existsSync(config_file)) {
+  config = new Config(config_file);
+} else {
+  config = null;
+}
+
+const app = new MainApp({spriteName: NAME, program: program, config: config});
 
 //if(!prompt('About to run without options, work this directory?')) return;
 

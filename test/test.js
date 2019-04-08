@@ -4,6 +4,7 @@ const path    = require('path');
 
 const SvgGroup = require('../lib/svg-group').SvgGroup;
 const SvgFile  = require('../lib/svg-file').SvgFile;
+const Config  = require('../lib/config').Config;
 
 const MainApp = require('../lib/main');
 const assert  = require('assert');
@@ -27,7 +28,7 @@ describe('Test with without fresh load', _=>{
   it('Should check #files', ()=>{
     assert(!mainSvg.files().length);
     mainSvg.add(basePath('files'));
-    assert.equal(mainSvg.files().length, 7);
+    assert.equal(mainSvg.files().length, 8);
   });
   
   /*
@@ -78,7 +79,7 @@ describe('Test with fresh load', _=>{
   it('should check the SVG total height/width', ()=>{
     mainSvg.add(basePath('files'));
 
-    assert.equal(mainSvg.height(), 222);
+    assert.equal(mainSvg.height(), 254);
     
     // Width being the item with the largest.
     assert.equal(mainSvg.width(), 43);
@@ -231,4 +232,17 @@ describe('Tests for SvgGroup', ()=>{
   it("checks the postfix with postfixUri but no forward slash", ()=>{
     assert_path('postfix/testfile.svg', {postfixUri: 'postfix/', relative: false});
   });
+});
+
+
+describe('Tests for Config', ()=>{
+  
+  var mainSvg;
+
+  it('ignores files in sprite_ignores option', ()=>{
+    const config = new Config('./test/files/svg-css-compiler-config.json')
+    mainSvg = new MainApp({spriteName: 'sprites', config: config});
+    mainSvg.add(basePath('files'));
+    assert.equal(mainSvg.files().length, 7);
+  })
 });
