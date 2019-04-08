@@ -243,6 +243,6 @@ describe('Tests for Config', ()=>{
     const config = new Config('./test/files/svg-css-compiler-config.json')
     mainSvg = new MainApp({spriteName: 'sprites', config: config});
     mainSvg.add(basePath('files'));
-    assert.equal(mainSvg.files().length, 7);
+    assert.equal(mainSvg.files().length, 8);
   })
 });
