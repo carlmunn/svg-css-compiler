@@ -145,7 +145,7 @@ describe('Test with fresh load', _=>{
 });
 
 describe('Test CSS Generation', _=>{
-  
+
   var mainSvg;
   const cssBgRegex = /background:\s.*\s(\d{1,2})px\s(-\d{1,2})px;/;
 
@@ -179,7 +179,6 @@ describe('Test CSS Generation', _=>{
     assert(str.length > 10);
   });
 
-
   it('tests CSS generated string', ()=>{
     mainSvg.renderCss();
     
@@ -205,35 +204,68 @@ describe('Test CSS Generation', _=>{
 
 describe('Tests for SvgGroup', ()=>{
 
-  var obj = null;
+  var obj      = null;
   var filename = null;
 
   beforeEach(()=>{
     obj      = new SvgGroup;
-    filename = 'testfile.svg';
+    filename = 'sprite.svg';
   });
 
   function assert_path(_path, opts) {
     assert.equal(obj._location(filename, opts), _path);
   }
 
-  it("checks the postfix is generated with absolute", ()=>{
-    assert_path('testfile.svg', {});
+  it("checks the prefix is generated with absolute", ()=>{
+    assert_path('sprite.svg', {});
   });
 
-  it("checks the postfix with no postfixUri", ()=>{
-    assert_path('testfile.svg', {relative: false});
+  it("checks the prefix with no prefixUri", ()=>{
+    assert_path('sprite.svg', {relative: false});
   });
 
-  it("checks the postfix with postfixUri", ()=>{
-    assert_path('/postfix/testfile.svg', {postfixUri: '/postfix/', relative: false});
+  it("checks the prefix with prefixUri", ()=>{
+    assert_path('/sprefix/sprite.svg', {prefixSpriteUri: '/sprefix/', relative: false});
   });
 
-  it("checks the postfix with postfixUri but no forward slash", ()=>{
-    assert_path('postfix/testfile.svg', {postfixUri: 'postfix/', relative: false});
+  it("checks the prefix with prefixUri but no forward slash", ()=>{
+    assert_path('sprefix/sprite.svg', {prefixSpriteUri: 'sprefix/', relative: false});
   });
+
+  it('tests the file prefix paths', ()=>{
+    const svgFile  = new SvgFile('./test/files/home.svg');
+    const svgGroup = new SvgGroup;
+    svgGroup.add(svgFile);
+
+    console.info(svgGroup[0].uri)
+    
+    svgGroup.toScss({prefixUri: '/PREFIXED/'});
+    assert.equal(svgGroup[0].uri, '/PREFIXED/home.svg')
+  });
+
 });
 
+// describe('Tests for sprite', ()=>{
+
+//   var mainSvg      = null;
+//   //ar filename = null;
+
+//   beforeEach(()=>{
+//     mainSvg = new MainApp({spriteName: 'sprites', spriteprefixUri: 'xxx'});
+//     mainSvg.add(basePath('files'));
+//     // obj      = new SvgGroup;
+//     // filename = 'testfile.svg';
+//   });
+
+//   function assert_path(_path, opts) {
+//     console.info(mainSvg)
+//     //assert.equal(obj._location(filename, opts), _path);
+//   }
+
+//   it.only('checks the sprite prefix with prefixSpriteUri', ()=>{
+//     assert_path('/prefix/testfile.svg', {prefixSpriteUri: '/spritePrefix/', relative: false});
+//   });
+// });
 
 describe('Tests for Config', ()=>{
   
